@@ -244,6 +244,73 @@
     .spot-av:first-child { margin-left: 0; }
     .spot-plus { width: 18px; height: 18px; border-radius: 50%; background: var(--coral); border: 1.5px solid white; margin-left: -5px; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white; font-weight: 700; }
 
+    /* ── NETWORK COMMUNITY ── */
+    .network-scene {
+      position: relative; max-width: 920px; height: 520px;
+      margin: 60px auto 0; user-select: none;
+    }
+    .network-bg {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px);
+      background-size: 30px 30px; border-radius: 24px;
+    }
+    .network-svg {
+      position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+    }
+    .net-line { stroke: #E5E7EB; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; animation: dashFlow 3s linear infinite; }
+    .net-line--outer { stroke: #EFEFEF; animation-duration: 5s; }
+    @keyframes dashFlow { to { stroke-dashoffset: -20; } }
+    .p-node {
+      position: absolute; transform: translate(-50%,-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      animation: nodeFloat 6s ease-in-out infinite; z-index: 2;
+    }
+    .p-node:nth-child(3) { animation-delay:-1.5s; }
+    .p-node:nth-child(4) { animation-delay:-3s; }
+    .p-node:nth-child(5) { animation-delay:-0.8s; }
+    .p-node:nth-child(6) { animation-delay:-2.2s; }
+    .p-node:nth-child(7) { animation-delay:-4s; }
+    .p-node:nth-child(8) { animation-delay:-1.2s; }
+    .p-node:nth-child(9) { animation-delay:-3.5s; }
+    .p-node:nth-child(10) { animation-delay:-0.5s; }
+    @keyframes nodeFloat { 0%,100%{ transform:translate(-50%,-50%); } 50%{ transform:translate(-50%,-60%); } }
+    .p-node-av {
+      border-radius: 50%; border: 3px solid white;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .p-node--hub .p-node-av { width: 80px; height: 80px; border-width: 4px; box-shadow: 0 8px 30px rgba(255,90,95,0.3); }
+    .p-node--md .p-node-av { width: 56px; height: 56px; }
+    .p-node--sm .p-node-av { width: 44px; height: 44px; border-width: 2px; }
+    .p-node-label {
+      font-size: 11px; font-weight: 600; color: var(--dark);
+      background: white; padding: 3px 10px; border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08); white-space: nowrap;
+    }
+    .p-node-country { font-size: 10px; color: var(--gray); }
+    .chat-bbl {
+      position: absolute; z-index: 3;
+      background: #25D366; color: white;
+      font-size: 12px; line-height: 1.5; font-weight: 500;
+      padding: 10px 14px; border-radius: 14px 14px 14px 3px;
+      max-width: 195px; box-shadow: 0 4px 20px rgba(37,211,102,0.28);
+      animation: bblFloat 7s ease-in-out infinite;
+    }
+    .chat-bbl--local {
+      background: white; color: var(--dark);
+      border-radius: 14px 14px 3px 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      animation-delay: -3.5s;
+    }
+    @keyframes bblFloat { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+    .community-stats {
+      display: flex; justify-content: center; gap: 64px;
+      margin-top: 56px; padding-top: 40px; border-top: 1px solid #F3F4F6;
+    }
+    .c-stat { text-align: center; }
+    .c-stat strong { display: block; font-size: 38px; font-weight: 900; color: var(--dark); letter-spacing: -1.5px; line-height: 1; }
+    .c-stat span { font-size: 13px; color: var(--gray); margin-top: 6px; display: block; font-weight: 500; }
+
     /* ── GET CONNECTED ── */
     .connected-section {
       padding: 80px 60px;
@@ -383,7 +450,11 @@
       .hero-card { padding: 40px 28px; flex-direction: column; gap: 40px; min-height: auto; }
       .hero-phones { display: none; }
       .community { padding: 80px 24px 60px; }
-      .map-container { height: 280px; }
+      .network-scene { height: 360px; }
+      .p-node--sm { display: none; }
+      .chat-bbl { font-size: 11px; max-width: 150px; }
+      .community-stats { gap: 28px; }
+      .c-stat strong { font-size: 28px; }
       .connected-section, .know-section { flex-direction: column; padding: 60px 24px; gap: 48px; }
       .connected-visual { flex: none; width: 100%; }
       .connected-photo { width: 100%; height: 300px; }
@@ -567,71 +638,126 @@
   </div>
 </div>
 
-<!-- COMMUNITY MAP -->
+<!-- COMMUNITY NETWORK -->
 <section class="community" id="comunidad">
-  <div class="section-eyebrow">Construye comunidad</div>
-  <h2 class="section-title">Únete a la comunidad<br/>de Migos</h2>
+  <div class="section-eyebrow">Comunidad global</div>
+  <h2 class="section-title">Viajeros y locales,<br/>conectados en el mundo</h2>
   <div class="title-underline"></div>
 
-  <div class="map-container">
-    <div class="map-bg"></div>
+  <div class="network-scene">
+    <div class="network-bg"></div>
 
-    <!-- Blobs -->
-    <div class="map-blob coral" style="width:200px;height:180px;top:38%;left:42%;transform:translate(-50%,-50%)"></div>
-    <div class="map-blob yellow" style="width:100px;height:90px;top:60%;left:18%;transform:translate(-50%,-50%)"></div>
-    <div class="map-blob yellow" style="width:80px;height:70px;top:30%;left:80%;transform:translate(-50%,-50%)"></div>
-
-    <!-- SVG lines connecting people -->
-    <svg class="connect-line" style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 900 400" preserveAspectRatio="none">
-      <path d="M 160 300 Q 350 280 450 200" stroke="#FF5A5F" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6 4"/>
-      <path d="M 450 200 Q 580 160 720 280" stroke="#FF5A5F" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6 4"/>
-      <path d="M 310 340 Q 380 300 450 200" stroke="#F5A623" stroke-width="1.5" fill="none" opacity="0.25" stroke-dasharray="6 4"/>
+    <!-- SVG connection lines -->
+    <svg class="network-svg" viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg">
+      <path class="net-line" d="M460,248 Q312,176 165,105"/>
+      <path class="net-line" d="M460,248 Q402,158 345,72"/>
+      <path class="net-line" d="M460,248 Q555,173 650,98"/>
+      <path class="net-line" d="M460,248 Q630,232 800,215"/>
+      <path class="net-line" d="M460,248 Q587,322 715,395"/>
+      <path class="net-line" d="M460,248 Q332,322 205,395"/>
+      <path class="net-line" d="M460,248 Q275,239 90,230"/>
+      <path class="net-line" d="M460,248 Q462,344 465,440"/>
+      <path class="net-line net-line--outer" d="M165,105 Q255,88 345,72"/>
+      <path class="net-line net-line--outer" d="M650,98 Q725,156 800,215"/>
+      <path class="net-line net-line--outer" d="M205,395 Q335,418 465,440"/>
+      <path class="net-line net-line--outer" d="M715,395 Q590,418 465,440"/>
     </svg>
 
-    <!-- User bubbles -->
-    <div class="user-bubble" style="top:75%;left:18%">
-      <div class="user-av" style="background:linear-gradient(135deg,#d4a96a,#8b6914)"></div>
-      <div class="user-label">Smith</div>
-      <div class="user-country">England</div>
-    </div>
-    <div class="user-bubble" style="top:85%;left:35%">
-      <div class="user-av" style="background:linear-gradient(135deg,#6366f1,#a5b4fc)"></div>
-      <div class="user-label">Farzan</div>
-      <div class="user-country">Georgia</div>
-    </div>
-    <div class="user-bubble" style="top:50%;left:35%" style="animation-delay:-2s">
-      <div class="user-av" style="background:linear-gradient(135deg,#ec4899,#f9a8d4)"></div>
-      <div class="user-label">Julie</div>
-      <div class="user-country">Poland</div>
-    </div>
-    <div class="user-bubble" style="top:70%;left:80%">
-      <div class="user-av" style="background:linear-gradient(135deg,#14b8a6,#99f6e4)"></div>
-      <div class="user-label">Sajon</div>
-      <div class="user-country">Finland</div>
-    </div>
-    <div class="user-bubble" style="top:35%;left:70%">
-      <div class="user-av" style="background:linear-gradient(135deg,#f59e0b,#fde68a)"></div>
-      <div class="user-label">Jessica</div>
-      <div class="user-country">Egypt</div>
+    <!-- Hub (centro) -->
+    <div class="p-node p-node--hub" style="top:47.7%;left:50%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#FF5A5F,#ff8a8e)">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+      </div>
     </div>
 
-    <!-- Spot card -->
-    <div class="spot-card" style="top:48%;left:50%">
-      <div class="spot-img">
-        <div style="width:100%;height:100%;background:linear-gradient(135deg,#FF5A5F,#ff9a9e);display:flex;align-items:center;justify-content:center">
-          <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
+    <!-- Smith · England — top-left -->
+    <div class="p-node p-node--md" style="top:20.2%;left:17.9%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#3B82F6,#93c5fd)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
       </div>
-      <div>
-        <div class="spot-name">Madrid City</div>
-        <div class="spot-people">
-          <div class="spot-av" style="background:linear-gradient(135deg,#FF5A5F,#ff9a9e)"></div>
-          <div class="spot-av" style="background:linear-gradient(135deg,#3B82F6,#93c5fd)"></div>
-          <div class="spot-av" style="background:linear-gradient(135deg,#8B5CF6,#c4b5fd)"></div>
-          <div class="spot-plus">+</div>
-        </div>
-      </div>
+      <div class="p-node-label">Smith</div>
+      <div class="p-node-country">🇬🇧 England</div>
     </div>
+
+    <!-- María · España — top-center -->
+    <div class="p-node p-node--md" style="top:13.8%;left:37.5%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#8B5CF6,#c4b5fd)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">María</div>
+      <div class="p-node-country">🇪🇸 España</div>
+    </div>
+
+    <!-- Julie · France — top-right -->
+    <div class="p-node p-node--md" style="top:18.8%;left:70.7%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#F59E0B,#fde68a)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">Julie</div>
+      <div class="p-node-country">🇫🇷 France</div>
+    </div>
+
+    <!-- Adam · USA — right -->
+    <div class="p-node p-node--sm" style="top:41.3%;left:87%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#10B981,#6ee7b7)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">Adam</div>
+      <div class="p-node-country">🇺🇸 USA</div>
+    </div>
+
+    <!-- Laura · Italia — bottom-right -->
+    <div class="p-node p-node--md" style="top:76%;left:77.7%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#EC4899,#f9a8d4)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">Laura</div>
+      <div class="p-node-country">🇮🇹 Italia</div>
+    </div>
+
+    <!-- Farzan · Georgia — bottom-left -->
+    <div class="p-node p-node--md" style="top:76%;left:22.3%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#6366F1,#a5b4fc)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">Farzan</div>
+      <div class="p-node-country">🇬🇪 Georgia</div>
+    </div>
+
+    <!-- Karim · Morocco — left -->
+    <div class="p-node p-node--sm" style="top:44.2%;left:9.8%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#14B8A6,#99f6e4)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">Karim</div>
+      <div class="p-node-country">🇲🇦 Morocco</div>
+    </div>
+
+    <!-- Yuki · Japan — bottom-center -->
+    <div class="p-node p-node--sm" style="top:84.6%;left:50.5%">
+      <div class="p-node-av" style="background:linear-gradient(135deg,#F97316,#fdba74)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+      </div>
+      <div class="p-node-label">Yuki</div>
+      <div class="p-node-country">🇯🇵 Japan</div>
+    </div>
+
+    <!-- Chat bubbles -->
+    <div class="chat-bbl" style="top:3%;left:51%">
+      ¿Cuáles son las playas más bonitas de la costa?
+    </div>
+    <div class="chat-bbl chat-bbl--local" style="top:60%;left:2%">
+      Enséñame los sitios más bonitos de la ciudad 🗺️
+    </div>
+  </div>
+
+  <div class="community-stats">
+    <div class="c-stat"><strong>50+</strong><span>Ciudades</span></div>
+    <div class="c-stat"><strong>100%</strong><span>Verificados</span></div>
+    <div class="c-stat"><strong>4.9★</strong><span>Valoración media</span></div>
   </div>
 </section>
 
