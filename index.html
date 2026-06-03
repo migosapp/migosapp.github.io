@@ -244,65 +244,50 @@
     .spot-av:first-child { margin-left: 0; }
     .spot-plus { width: 18px; height: 18px; border-radius: 50%; background: var(--coral); border: 1.5px solid white; margin-left: -5px; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white; font-weight: 700; }
 
-    /* ── NETWORK COMMUNITY ── */
-    .network-scene {
-      position: relative; max-width: 920px; height: 520px;
-      margin: 60px auto 0; user-select: none;
+    /* ── MAP COMMUNITY ── */
+    .map-scene {
+      position: relative; max-width: 940px;
+      aspect-ratio: 2 / 1;
+      margin: 60px auto 0;
+      border-radius: 20px; overflow: visible;
     }
-    .network-bg {
-      position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px);
-      background-size: 30px 30px; border-radius: 24px;
+    .map-scene > svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      border-radius: 20px; display: block;
     }
-    .network-svg {
-      position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
+    .map-pin {
+      position: absolute; transform: translate(-50%, -100%);
+      display: flex; flex-direction: column; align-items: center;
+      z-index: 4; cursor: default;
     }
-    .net-line { stroke: #E5E7EB; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; animation: dashFlow 3s linear infinite; }
-    .net-line--outer { stroke: #EFEFEF; animation-duration: 5s; }
-    @keyframes dashFlow { to { stroke-dashoffset: -20; } }
-    .p-node {
-      position: absolute; transform: translate(-50%,-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 5px;
-      animation: nodeFloat 6s ease-in-out infinite; z-index: 2;
+    .map-pin img {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2.5px solid white;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.22);
+      object-fit: cover; display: block;
     }
-    .p-node:nth-child(3) { animation-delay:-1.5s; }
-    .p-node:nth-child(4) { animation-delay:-3s; }
-    .p-node:nth-child(5) { animation-delay:-0.8s; }
-    .p-node:nth-child(6) { animation-delay:-2.2s; }
-    .p-node:nth-child(7) { animation-delay:-4s; }
-    .p-node:nth-child(8) { animation-delay:-1.2s; }
-    .p-node:nth-child(9) { animation-delay:-3.5s; }
-    .p-node:nth-child(10) { animation-delay:-0.5s; }
-    @keyframes nodeFloat { 0%,100%{ transform:translate(-50%,-50%); } 50%{ transform:translate(-50%,-60%); } }
-    .p-node-av {
-      border-radius: 50%; border: 3px solid white;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.13);
-      display: flex; align-items: center; justify-content: center;
+    .map-pin-tail {
+      width: 0; height: 0; margin-top: -1px;
+      border-left: 5px solid transparent; border-right: 5px solid transparent;
+      border-top: 8px solid white;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
     }
-    .p-node--hub .p-node-av { width: 80px; height: 80px; border-width: 4px; box-shadow: 0 8px 30px rgba(255,90,95,0.3); }
-    .p-node--md .p-node-av { width: 56px; height: 56px; }
-    .p-node--sm .p-node-av { width: 44px; height: 44px; border-width: 2px; }
-    .p-node-label {
-      font-size: 11px; font-weight: 600; color: var(--dark);
-      background: white; padding: 3px 10px; border-radius: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08); white-space: nowrap;
+    .chat-card {
+      position: absolute; background: white;
+      border-radius: 14px; padding: 12px 15px;
+      box-shadow: 0 4px 22px rgba(0,0,0,0.1);
+      max-width: 220px; z-index: 6;
     }
-    .p-node-country { font-size: 10px; color: var(--gray); }
-    .chat-bbl {
-      position: absolute; z-index: 3;
-      background: #25D366; color: white;
-      font-size: 12px; line-height: 1.5; font-weight: 500;
-      padding: 10px 14px; border-radius: 14px 14px 14px 3px;
-      max-width: 195px; box-shadow: 0 4px 20px rgba(37,211,102,0.28);
-      animation: bblFloat 7s ease-in-out infinite;
+    .chat-card-header {
+      display: flex; align-items: center; gap: 9px; margin-bottom: 8px;
     }
-    .chat-bbl--local {
-      background: white; color: var(--dark);
-      border-radius: 14px 14px 3px 14px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      animation-delay: -3.5s;
+    .chat-card-header img {
+      width: 30px; height: 30px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
     }
-    @keyframes bblFloat { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-9px); } }
+    .chat-card-name { font-size: 12px; font-weight: 700; color: var(--dark); line-height: 1.2; }
+    .chat-card-role { font-size: 10px; color: var(--coral); font-weight: 600; }
+    .chat-card-msg { font-size: 12px; color: var(--gray); line-height: 1.5; font-style: italic; }
     .community-stats {
       display: flex; justify-content: center; gap: 64px;
       margin-top: 56px; padding-top: 40px; border-top: 1px solid #F3F4F6;
@@ -450,9 +435,10 @@
       .hero-card { padding: 40px 28px; flex-direction: column; gap: 40px; min-height: auto; }
       .hero-phones { display: none; }
       .community { padding: 80px 24px 60px; }
-      .network-scene { height: 360px; }
-      .p-node--sm { display: none; }
-      .chat-bbl { font-size: 11px; max-width: 150px; }
+      .map-scene { aspect-ratio: 3/2; }
+      .map-pin img { width: 34px; height: 34px; }
+      .map-pin-tail { border-left-width: 4px; border-right-width: 4px; border-top-width: 6px; }
+      .chat-card { display: none; }
       .community-stats { gap: 28px; }
       .c-stat strong { font-size: 28px; }
       .connected-section, .know-section { flex-direction: column; padding: 60px 24px; gap: 48px; }
@@ -638,119 +624,121 @@
   </div>
 </div>
 
-<!-- COMMUNITY NETWORK -->
+<!-- COMMUNITY MAP -->
 <section class="community" id="comunidad">
   <div class="section-eyebrow">Comunidad global</div>
   <h2 class="section-title">Viajeros y locales,<br/>conectados en el mundo</h2>
   <div class="title-underline"></div>
 
-  <div class="network-scene">
-    <div class="network-bg"></div>
-
-    <!-- SVG connection lines -->
-    <svg class="network-svg" viewBox="0 0 920 520" xmlns="http://www.w3.org/2000/svg">
-      <path class="net-line" d="M460,248 Q312,176 165,105"/>
-      <path class="net-line" d="M460,248 Q402,158 345,72"/>
-      <path class="net-line" d="M460,248 Q555,173 650,98"/>
-      <path class="net-line" d="M460,248 Q630,232 800,215"/>
-      <path class="net-line" d="M460,248 Q587,322 715,395"/>
-      <path class="net-line" d="M460,248 Q332,322 205,395"/>
-      <path class="net-line" d="M460,248 Q275,239 90,230"/>
-      <path class="net-line" d="M460,248 Q462,344 465,440"/>
-      <path class="net-line net-line--outer" d="M165,105 Q255,88 345,72"/>
-      <path class="net-line net-line--outer" d="M650,98 Q725,156 800,215"/>
-      <path class="net-line net-line--outer" d="M205,395 Q335,418 465,440"/>
-      <path class="net-line net-line--outer" d="M715,395 Q590,418 465,440"/>
+  <div class="map-scene">
+    <!-- World map SVG (equirectangular, viewBox 1000×500) -->
+    <svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <!-- Ocean -->
+      <rect width="1000" height="500" fill="#E8EBF0"/>
+      <!-- Graticule: equator + tropics -->
+      <line x1="0" y1="250" x2="1000" y2="250" stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+      <line x1="0" y1="167" x2="1000" y2="167" stroke="rgba(255,255,255,0.35)" stroke-width="0.6"/>
+      <line x1="0" y1="333" x2="1000" y2="333" stroke="rgba(255,255,255,0.35)" stroke-width="0.6"/>
+      <line x1="500" y1="0" x2="500" y2="500" stroke="rgba(255,255,255,0.3)" stroke-width="0.6"/>
+      <line x1="333" y1="0" x2="333" y2="500" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+      <line x1="667" y1="0" x2="667" y2="500" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+      <line x1="833" y1="0" x2="833" y2="500" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+      <line x1="167" y1="0" x2="167" y2="500" stroke="rgba(255,255,255,0.22)" stroke-width="0.5"/>
+      <!-- North America -->
+      <path d="M45,68 L60,50 L118,44 L215,44 L322,55 L342,78 L352,112 L310,148 L295,183 L268,212 L235,200 L198,188 L168,162 L155,120 L108,84 Z" fill="#C5CAD6"/>
+      <!-- Greenland -->
+      <path d="M345,50 L405,17 L450,38 L435,72 L362,80 Z" fill="#C5CAD6"/>
+      <!-- Iceland -->
+      <path d="M415,84 L434,79 L440,91 L428,98 L414,94 Z" fill="#C5CAD6"/>
+      <!-- South America -->
+      <path d="M268,218 L318,214 L405,268 L400,302 L372,338 L342,348 L306,408 L282,390 L268,352 L256,302 L258,256 Z" fill="#C5CAD6"/>
+      <!-- British Isles -->
+      <path d="M446,92 L455,86 L466,86 L472,96 L464,106 L452,108 Z" fill="#C5CAD6"/>
+      <path d="M436,104 L444,100 L448,108 L440,112 Z" fill="#C5CAD6"/>
+      <!-- Europe -->
+      <path d="M466,104 L480,94 L502,90 L522,84 L540,80 L558,73 L580,59 L608,60 L622,80 L615,108 L602,128 L590,145 L568,152 L548,150 L526,144 L508,148 L490,152 L476,148 Z" fill="#C5CAD6"/>
+      <!-- Africa -->
+      <path d="M462,153 L534,145 L596,162 L615,170 L638,215 L624,242 L618,268 L598,310 L568,346 L544,352 L520,340 L510,314 L496,270 L490,218 L468,192 L454,168 Z" fill="#C5CAD6"/>
+      <!-- Madagascar -->
+      <path d="M604,295 L615,284 L624,296 L624,326 L612,338 L600,318 Z" fill="#C5CAD6"/>
+      <!-- Asia (main + Middle East + SE Asia) -->
+      <path d="M590,145 L608,138 L618,128 L650,105 L706,68 L758,48 L830,40 L910,44 L978,58 L980,82 L968,115 L942,150 L892,162 L854,172 L822,175 L792,198 L766,234 L748,238 L722,224 L698,194 L660,190 L648,194 L638,215 L615,170 L596,162 L534,145 Z" fill="#C5CAD6"/>
+      <!-- India (peninsula) -->
+      <path d="M698,194 L722,224 L715,240 L700,248 L685,230 L690,210 Z" fill="#C5CAD6"/>
+      <!-- Sri Lanka -->
+      <path d="M714,252 L719,248 L722,254 L717,260 Z" fill="#C5CAD6"/>
+      <!-- Japan -->
+      <path d="M884,120 L896,115 L902,128 L897,145 L882,140 Z" fill="#C5CAD6"/>
+      <!-- Australia -->
+      <path d="M818,310 L866,284 L912,305 L920,344 L910,372 L870,378 L822,358 L802,328 Z" fill="#C5CAD6"/>
+      <!-- New Zealand -->
+      <path d="M940,365 L948,355 L954,368 L944,378 Z" fill="#C5CAD6"/>
     </svg>
 
-    <!-- Hub (centro) -->
-    <div class="p-node p-node--hub" style="top:47.7%;left:50%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#FF5A5F,#ff8a8e)">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
-          <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-        </svg>
-      </div>
+    <!-- Map pins with real photos -->
+    <!-- Madrid, España — local -->
+    <div class="map-pin" style="left:48.9%;top:27.6%">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Local en Madrid"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- Nueva York, USA — viajero -->
+    <div class="map-pin" style="left:29.4%;top:27.4%">
+      <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Viajero de NYC"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- Tokyo, Japón — local -->
+    <div class="map-pin" style="left:88.8%;top:30.2%">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Local en Tokyo"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- Buenos Aires, Argentina — local -->
+    <div class="map-pin" style="left:33.8%;top:69.1%">
+      <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Local en Buenos Aires"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- Sydney, Australia — local -->
+    <div class="map-pin" style="left:92%;top:68.8%">
+      <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Local en Sydney"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- El Cairo, Egipto — local -->
+    <div class="map-pin" style="left:58.7%;top:33.2%">
+      <img src="https://randomuser.me/api/portraits/men/72.jpg" alt="Local en El Cairo"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- Ciudad de México — viajero -->
+    <div class="map-pin" style="left:22.5%;top:39.1%">
+      <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Viajero de México"/>
+      <div class="map-pin-tail"></div>
+    </div>
+    <!-- Mumbai, India — local -->
+    <div class="map-pin" style="left:70.2%;top:39.5%">
+      <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="Local en Mumbai"/>
+      <div class="map-pin-tail"></div>
     </div>
 
-    <!-- Smith · England — top-left -->
-    <div class="p-node p-node--md" style="top:20.2%;left:17.9%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#3B82F6,#93c5fd)">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+    <!-- Chat card 1: Viajero pregunta -->
+    <div class="chat-card" style="top:5%;left:4%">
+      <div class="chat-card-header">
+        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="James">
+        <div>
+          <div class="chat-card-name">James · Nueva York</div>
+          <div class="chat-card-role">Viajero</div>
+        </div>
       </div>
-      <div class="p-node-label">Smith</div>
-      <div class="p-node-country">🇬🇧 England</div>
+      <p class="chat-card-msg">"¿Cuáles son las playas más bonitas de la costa?"</p>
     </div>
 
-    <!-- María · España — top-center -->
-    <div class="p-node p-node--md" style="top:13.8%;left:37.5%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#8B5CF6,#c4b5fd)">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
+    <!-- Chat card 2: Local responde -->
+    <div class="chat-card" style="top:56%;left:37%">
+      <div class="chat-card-header">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="María">
+        <div>
+          <div class="chat-card-name">María · Madrid</div>
+          <div class="chat-card-role">Local ✓</div>
+        </div>
       </div>
-      <div class="p-node-label">María</div>
-      <div class="p-node-country">🇪🇸 España</div>
-    </div>
-
-    <!-- Julie · France — top-right -->
-    <div class="p-node p-node--md" style="top:18.8%;left:70.7%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#F59E0B,#fde68a)">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
-      </div>
-      <div class="p-node-label">Julie</div>
-      <div class="p-node-country">🇫🇷 France</div>
-    </div>
-
-    <!-- Adam · USA — right -->
-    <div class="p-node p-node--sm" style="top:41.3%;left:87%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#10B981,#6ee7b7)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
-      </div>
-      <div class="p-node-label">Adam</div>
-      <div class="p-node-country">🇺🇸 USA</div>
-    </div>
-
-    <!-- Laura · Italia — bottom-right -->
-    <div class="p-node p-node--md" style="top:76%;left:77.7%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#EC4899,#f9a8d4)">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
-      </div>
-      <div class="p-node-label">Laura</div>
-      <div class="p-node-country">🇮🇹 Italia</div>
-    </div>
-
-    <!-- Farzan · Georgia — bottom-left -->
-    <div class="p-node p-node--md" style="top:76%;left:22.3%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#6366F1,#a5b4fc)">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
-      </div>
-      <div class="p-node-label">Farzan</div>
-      <div class="p-node-country">🇬🇪 Georgia</div>
-    </div>
-
-    <!-- Karim · Morocco — left -->
-    <div class="p-node p-node--sm" style="top:44.2%;left:9.8%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#14B8A6,#99f6e4)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
-      </div>
-      <div class="p-node-label">Karim</div>
-      <div class="p-node-country">🇲🇦 Morocco</div>
-    </div>
-
-    <!-- Yuki · Japan — bottom-center -->
-    <div class="p-node p-node--sm" style="top:84.6%;left:50.5%">
-      <div class="p-node-av" style="background:linear-gradient(135deg,#F97316,#fdba74)">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(255,255,255,0.9)"><circle cx="12" cy="8" r="5"/><path d="M2 22c0-6 4.5-10 10-10s10 4 10 10"/></svg>
-      </div>
-      <div class="p-node-label">Yuki</div>
-      <div class="p-node-country">🇯🇵 Japan</div>
-    </div>
-
-    <!-- Chat bubbles -->
-    <div class="chat-bbl" style="top:3%;left:51%">
-      ¿Cuáles son las playas más bonitas de la costa?
-    </div>
-    <div class="chat-bbl chat-bbl--local" style="top:60%;left:2%">
-      Enséñame los sitios más bonitos de la ciudad 🗺️
+      <p class="chat-card-msg">"¡Claro! Te enseño los mejores rincones 🗺️"</p>
     </div>
   </div>
 
@@ -942,11 +930,10 @@
   </div>
   <div class="footer-bottom">
     <p>© 2025 Migos. Todos los derechos reservados.</p>
-    <div class="footer-rating">
-      <span class="stars">★★★★★</span>
-      <span>4.9 · Valoración de usuarios</span>
+    <div style="display:flex;gap:20px;">
+      <a href="terms.html" style="font-size:13px;color:var(--light-gray);text-decoration:none;">Términos y Condiciones</a>
+      <a href="privacy.html" style="font-size:13px;color:var(--light-gray);text-decoration:none;">Política de Privacidad</a>
     </div>
-    <p>Hecho con ♥ en España</p>
   </div>
 </footer>
 
