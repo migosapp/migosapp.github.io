@@ -317,7 +317,9 @@
       margin-top: 56px; padding-top: 40px;
     }
     .c-stat { text-align: center; }
-    .c-stat strong { display: block; font-size: 38px; font-weight: 900; color: var(--dark); letter-spacing: -1.5px; line-height: 1; }
+    .c-stat strong { display: flex; align-items: center; justify-content: center; font-size: 38px; font-weight: 900; color: var(--dark); letter-spacing: -1.5px; line-height: 1; }
+    .c-stat strong .c-unit { font-size: 22px; font-weight: 800; margin-left: 2px; }
+    .c-stat strong .c-star { font-size: 20px; font-weight: 700; margin-left: 4px; }
     .c-stat span { font-size: 13px; color: var(--gray); margin-top: 6px; display: block; font-weight: 500; }
 
     /* ── GET CONNECTED ── */
@@ -787,8 +789,8 @@
 
   <div class="community-stats">
     <div class="c-stat"><strong>50+</strong><span>Ciudades</span></div>
-    <div class="c-stat"><strong>100%</strong><span>Verificados</span></div>
-    <div class="c-stat"><strong>4.9★</strong><span>Valoración media</span></div>
+    <div class="c-stat"><strong>100<span class="c-unit">%</span></strong><span>Verificados</span></div>
+    <div class="c-stat"><strong>4.9<span class="c-star">★</span></strong><span>Valoración media</span></div>
   </div>
 </section>
 
